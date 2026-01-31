@@ -1,24 +1,64 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Event extends Task {
 
-    protected String from;
-    protected String to;
+    protected LocalDate fromDate;
+    protected LocalDate toDate;
+    protected String fromString;
+    protected String toString;
+    private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     public Event(String description, String from, String to) {
         super(description);
-        this.from = from;
-        this.to = to;
+        try {
+            this.fromDate = LocalDate.parse(from, INPUT_FORMAT);
+            this.fromString = null;
+        } catch (DateTimeParseException e) {
+            this.fromDate = null;
+            this.fromString = from;
+        }
+        try {
+            this.toDate = LocalDate.parse(to, INPUT_FORMAT);
+            this.toString = null;
+        } catch (DateTimeParseException e) {
+            this.toDate = null;
+            this.toString = to;
+        }
     }
 
     public String getFrom() {
-        return from;
+        if (fromDate != null) {
+            return fromDate.format(INPUT_FORMAT);
+        }
+        return fromString;
     }
 
     public String getTo() {
-        return to;
+        if (toDate != null) {
+            return toDate.format(INPUT_FORMAT);
+        }
+        return toString;
+    }
+
+    public String getFromForDisplay() {
+        if (fromDate != null) {
+            return fromDate.format(OUTPUT_FORMAT);
+        }
+        return fromString;
+    }
+
+    public String getToForDisplay() {
+        if (toDate != null) {
+            return toDate.format(OUTPUT_FORMAT);
+        }
+        return toString;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+        return "[E]" + super.toString() + " (from: " + getFromForDisplay() + " to: " + getToForDisplay() + ")";
     }
 }
