@@ -1,3 +1,5 @@
+package aurafarmer.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -7,7 +9,7 @@ public class Event extends Task {
     protected LocalDate fromDate;
     protected LocalDate toDate;
     protected String fromString;
-    protected String toString;
+    protected String toStringVal;
     private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy");
 
@@ -22,10 +24,10 @@ public class Event extends Task {
         }
         try {
             this.toDate = LocalDate.parse(to, INPUT_FORMAT);
-            this.toString = null;
+            this.toStringVal = null;
         } catch (DateTimeParseException e) {
             this.toDate = null;
-            this.toString = to;
+            this.toStringVal = to;
         }
     }
 
@@ -40,7 +42,7 @@ public class Event extends Task {
         if (toDate != null) {
             return toDate.format(INPUT_FORMAT);
         }
-        return toString;
+        return toStringVal;
     }
 
     public String getFromForDisplay() {
@@ -54,7 +56,7 @@ public class Event extends Task {
         if (toDate != null) {
             return toDate.format(OUTPUT_FORMAT);
         }
-        return toString;
+        return toStringVal;
     }
 
     @Override

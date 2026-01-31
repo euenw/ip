@@ -1,4 +1,8 @@
+package aurafarmer;
+
 import java.util.Scanner;
+
+import aurafarmer.task.Task;
 
 public class Ui {
     private static final String LINE = "    ____________________________________________________________";

@@ -1,3 +1,11 @@
+package aurafarmer.command;
+
+import aurafarmer.AuraFarmerException;
+import aurafarmer.Storage;
+import aurafarmer.TaskList;
+import aurafarmer.Ui;
+import aurafarmer.task.Task;
+
 public class DeleteCommand extends Command {
     private int taskIndex;
 

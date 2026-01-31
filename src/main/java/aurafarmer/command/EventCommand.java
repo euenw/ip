@@ -1,3 +1,12 @@
+package aurafarmer.command;
+
+import aurafarmer.AuraFarmerException;
+import aurafarmer.Storage;
+import aurafarmer.TaskList;
+import aurafarmer.Ui;
+import aurafarmer.task.Event;
+import aurafarmer.task.Task;
+
 public class EventCommand extends Command {
     private String description;
     private String from;

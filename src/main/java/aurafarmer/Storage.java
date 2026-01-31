@@ -1,8 +1,15 @@
+package aurafarmer;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import aurafarmer.task.Deadline;
+import aurafarmer.task.Event;
+import aurafarmer.task.Task;
+import aurafarmer.task.Todo;
 
 public class Storage {
     private String filePath;

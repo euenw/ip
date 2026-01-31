@@ -1,3 +1,7 @@
+package aurafarmer;
+
+import aurafarmer.command.Command;
+
 public class AuraFarmer {
 
     private Storage storage;

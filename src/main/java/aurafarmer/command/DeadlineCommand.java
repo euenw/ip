@@ -1,3 +1,12 @@
+package aurafarmer.command;
+
+import aurafarmer.AuraFarmerException;
+import aurafarmer.Storage;
+import aurafarmer.TaskList;
+import aurafarmer.Ui;
+import aurafarmer.task.Deadline;
+import aurafarmer.task.Task;
+
 public class DeadlineCommand extends Command {
     private String description;
     private String by;

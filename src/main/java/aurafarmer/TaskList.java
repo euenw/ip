@@ -1,4 +1,8 @@
+package aurafarmer;
+
 import java.util.ArrayList;
+
+import aurafarmer.task.Task;
 
 public class TaskList {
     private ArrayList<Task> tasks;
