@@ -2,9 +2,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AuraFarmer {
+    private static final String FILE_PATH = "data/aurafarmer.txt";
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
+        Storage storage = new Storage(FILE_PATH);
+        ArrayList<Task> tasks;
+
+        // Load tasks from file
+        try {
+            tasks = storage.load();
+        } catch (AuraFarmerException e) {
+            System.out.println("    aura: " + e.getMessage());
+            tasks = new ArrayList<>();
+        }
 
         System.out.println("    ____________________________________________________________");
         System.out.println("    aura: hello! i'm aurafarmer");
@@ -34,21 +45,27 @@ public class AuraFarmer {
                     break;
                 case MARK:
                     handleMark(input, tasks);
+                    storage.save(tasks);
                     break;
                 case UNMARK:
                     handleUnmark(input, tasks);
+                    storage.save(tasks);
                     break;
                 case TODO:
                     handleTodo(input, tasks);
+                    storage.save(tasks);
                     break;
                 case DEADLINE:
                     handleDeadline(input, tasks);
+                    storage.save(tasks);
                     break;
                 case EVENT:
                     handleEvent(input, tasks);
+                    storage.save(tasks);
                     break;
                 case DELETE:
                     handleDelete(input, tasks);
+                    storage.save(tasks);
                     break;
                 case UNKNOWN:
                     throw new AuraFarmerException("i don't know what that means, you're losing aura");
