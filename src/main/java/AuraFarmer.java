@@ -40,11 +40,44 @@ public class AuraFarmer {
                 System.out.println("    aura: ok, i've marked this task as not done yet:");
                 System.out.println("    aura:   " + tasks[taskIndex]);
                 System.out.println("    ____________________________________________________________");
-            } else {
-                tasks[taskCount] = new Task(input);
+            } else if (input.startsWith("todo ")) {
+                String description = input.substring(5);
+                tasks[taskCount] = new Todo(description);
                 taskCount++;
                 System.out.println("    ____________________________________________________________");
-                System.out.println("    aura: added: " + input);
+                System.out.println("    aura: got it. i've added this task:");
+                System.out.println("    aura:   " + tasks[taskCount - 1]);
+                System.out.println("    aura: now you have " + taskCount + " tasks in the list.");
+                System.out.println("    ____________________________________________________________");
+            } else if (input.startsWith("deadline ")) {
+                String rest = input.substring(9);
+                int byIndex = rest.indexOf(" /by ");
+                String description = rest.substring(0, byIndex);
+                String by = rest.substring(byIndex + 5);
+                tasks[taskCount] = new Deadline(description, by);
+                taskCount++;
+                System.out.println("    ____________________________________________________________");
+                System.out.println("    aura: got it. i've added this task:");
+                System.out.println("    aura:   " + tasks[taskCount - 1]);
+                System.out.println("    aura: now you have " + taskCount + " tasks in the list.");
+                System.out.println("    ____________________________________________________________");
+            } else if (input.startsWith("event ")) {
+                String rest = input.substring(6);
+                int fromIndex = rest.indexOf(" /from ");
+                int toIndex = rest.indexOf(" /to ");
+                String description = rest.substring(0, fromIndex);
+                String from = rest.substring(fromIndex + 7, toIndex);
+                String to = rest.substring(toIndex + 5);
+                tasks[taskCount] = new Event(description, from, to);
+                taskCount++;
+                System.out.println("    ____________________________________________________________");
+                System.out.println("    aura: got it. i've added this task:");
+                System.out.println("    aura:   " + tasks[taskCount - 1]);
+                System.out.println("    aura: now you have " + taskCount + " tasks in the list.");
+                System.out.println("    ____________________________________________________________");
+            } else {
+                System.out.println("    ____________________________________________________________");
+                System.out.println("    aura: i don't understand that command");
                 System.out.println("    ____________________________________________________________");
             }
         }
