@@ -4,6 +4,8 @@ import aurafarmer.command.Command;
 
 public class AuraFarmer {
 
+    private static final String DATA_FILE_PATH = "data/aurafarmer.txt";
+
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -26,9 +28,9 @@ public class AuraFarmer {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
+                Command command = Parser.parse(fullCommand);
+                command.execute(tasks, ui, storage);
+                isExit = command.isExit();
             } catch (AuraFarmerException e) {
                 ui.showError(e.getMessage());
             } finally {
@@ -39,6 +41,6 @@ public class AuraFarmer {
     }
 
     public static void main(String[] args) {
-        new AuraFarmer("data/aurafarmer.txt").run();
+        new AuraFarmer(DATA_FILE_PATH).run();
     }
 }

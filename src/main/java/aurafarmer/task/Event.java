@@ -6,12 +6,13 @@ import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
 
+    private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy");
+
     protected LocalDate fromDate;
     protected LocalDate toDate;
     protected String fromString;
     protected String toStringVal;
-    private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     public Event(String description, String from, String to) {
         super(description);
