@@ -5,6 +5,7 @@ import aurafarmer.command.Command;
 import aurafarmer.command.DeadlineCommand;
 import aurafarmer.command.DeleteCommand;
 import aurafarmer.command.EventCommand;
+import aurafarmer.command.FindCommand;
 import aurafarmer.command.ListCommand;
 import aurafarmer.command.MarkCommand;
 import aurafarmer.command.TodoCommand;
@@ -33,6 +34,8 @@ public class Parser {
             return parseEventCommand(fullCommand);
         case "delete":
             return parseDeleteCommand(fullCommand);
+        case "find":
+            return parseFindCommand(fullCommand);
         default:
             throw new AuraFarmerException("i don't know what that means, you're losing aura");
         }
@@ -104,6 +107,14 @@ public class Parser {
             throw new AuraFarmerException("event needs both /from and /to times filled in");
         }
         return new EventCommand(description, from, to);
+    }
+
+    private static Command parseFindCommand(String input) throws AuraFarmerException {
+        if (input.length() <= 5 || input.substring(5).trim().isEmpty()) {
+            throw new AuraFarmerException("find what? give me a keyword");
+        }
+        String keyword = input.substring(5).trim();
+        return new FindCommand(keyword);
     }
 
     private static Command parseDeleteCommand(String input) throws AuraFarmerException {
