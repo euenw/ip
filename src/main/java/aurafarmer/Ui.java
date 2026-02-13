@@ -1,5 +1,6 @@
 package aurafarmer;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import aurafarmer.task.Task;
@@ -96,6 +97,13 @@ public class Ui {
     public void showTaskUnmarked(Task task) {
         System.out.println("    aura: ok, i've marked this task as not done yet:");
         System.out.println("    aura:   " + task);
+    }
+
+    public void showFoundTasks(ArrayList<Task> tasks) {
+        System.out.println("    aura: here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println("    " + (i + 1) + "." + tasks.get(i));
+        }
     }
 
     public void close() {
