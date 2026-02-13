@@ -10,8 +10,18 @@ import aurafarmer.command.MarkCommand;
 import aurafarmer.command.TodoCommand;
 import aurafarmer.command.UnmarkCommand;
 
+/**
+ * Parses user input and returns the corresponding command.
+ */
 public class Parser {
 
+    /**
+     * Parses the given user input string and returns the corresponding Command.
+     *
+     * @param fullCommand Full user input string.
+     * @return Command object corresponding to the user input.
+     * @throws AuraFarmerException If the input is invalid or unrecognized.
+     */
     public static Command parse(String fullCommand) throws AuraFarmerException {
         String[] parts = fullCommand.split(" ", 2);
         String commandWord = parts[0];

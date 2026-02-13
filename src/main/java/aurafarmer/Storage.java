@@ -11,13 +11,27 @@ import aurafarmer.task.Event;
 import aurafarmer.task.Task;
 import aurafarmer.task.Todo;
 
+/**
+ * Handles loading and saving of tasks to a file.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructs a new Storage with the given file path.
+     *
+     * @param filePath Path to the file used for storing tasks.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads tasks from the data file.
+     *
+     * @return List of tasks loaded from the file.
+     * @throws AuraFarmerException If the file cannot be read.
+     */
     public ArrayList<Task> load() throws AuraFarmerException {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(filePath);
@@ -77,6 +91,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the given list of tasks to the data file.
+     *
+     * @param tasks List of tasks to save.
+     * @throws AuraFarmerException If the file cannot be written.
+     */
     public void save(ArrayList<Task> tasks) throws AuraFarmerException {
         try {
             File file = new File(filePath);

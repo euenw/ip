@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 import aurafarmer.task.Task;
 
+/**
+ * Handles interactions with the user through the command line.
+ */
 public class Ui {
     private static final String LINE = "    ____________________________________________________________";
     private Scanner scanner;
@@ -39,6 +42,11 @@ public class Ui {
         return scanner.nextLine();
     }
 
+    /**
+     * Displays all tasks in the given task list.
+     *
+     * @param tasks TaskList to display.
+     */
     public void showTaskList(TaskList tasks) {
         System.out.println("    aura: here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
@@ -46,23 +54,45 @@ public class Ui {
         }
     }
 
+    /**
+     * Displays a message confirming a task was added.
+     *
+     * @param task Task that was added.
+     * @param size Current number of tasks in the list.
+     */
     public void showTaskAdded(Task task, int size) {
         System.out.println("    aura: got it. i've added this task:");
         System.out.println("    aura:   " + task);
         System.out.println("    aura: now you have " + size + " tasks in the list.");
     }
 
+    /**
+     * Displays a message confirming a task was deleted.
+     *
+     * @param task Task that was deleted.
+     * @param size Current number of tasks in the list.
+     */
     public void showTaskDeleted(Task task, int size) {
         System.out.println("    aura: noted. i've removed this task:");
         System.out.println("    aura:   " + task);
         System.out.println("    aura: now you have " + size + " tasks in the list.");
     }
 
+    /**
+     * Displays a message confirming a task was marked as done.
+     *
+     * @param task Task that was marked.
+     */
     public void showTaskMarked(Task task) {
         System.out.println("    aura: nice! i've marked this task as done:");
         System.out.println("    aura:   " + task);
     }
 
+    /**
+     * Displays a message confirming a task was marked as not done.
+     *
+     * @param task Task that was unmarked.
+     */
     public void showTaskUnmarked(Task task) {
         System.out.println("    aura: ok, i've marked this task as not done yet:");
         System.out.println("    aura:   " + task);

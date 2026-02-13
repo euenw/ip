@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a task with a deadline date.
+ */
 public class Deadline extends Task {
 
     protected LocalDate by;
@@ -11,6 +14,14 @@ public class Deadline extends Task {
     private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy");
 
+    /**
+     * Constructs a new Deadline with the given description and due date.
+     * If the date string is in yyyy-MM-dd format, it is parsed as a LocalDate.
+     * Otherwise, it is stored as a plain string.
+     *
+     * @param description Description of the deadline task.
+     * @param by Due date string.
+     */
     public Deadline(String description, String by) {
         super(description);
         try {
@@ -22,6 +33,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns the due date in yyyy-MM-dd format for storage.
+     *
+     * @return Due date string in input format.
+     */
     public String getBy() {
         if (by != null) {
             return by.format(INPUT_FORMAT);
@@ -29,6 +45,11 @@ public class Deadline extends Task {
         return byString;
     }
 
+    /**
+     * Returns the due date in a human-readable format for display.
+     *
+     * @return Due date string in display format.
+     */
     public String getByForDisplay() {
         if (by != null) {
             return by.format(OUTPUT_FORMAT);

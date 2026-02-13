@@ -2,12 +2,20 @@ package aurafarmer;
 
 import aurafarmer.command.Command;
 
+/**
+ * Represents the main chatbot application.
+ */
 public class AuraFarmer {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs a new AuraFarmer instance and loads tasks from the given file path.
+     *
+     * @param filePath Path to the data file for storing tasks.
+     */
     public AuraFarmer(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -19,6 +27,9 @@ public class AuraFarmer {
         }
     }
 
+    /**
+     * Runs the main loop of the chatbot, reading and executing commands until exit.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
