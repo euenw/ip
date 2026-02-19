@@ -1,6 +1,7 @@
 package aurafarmer;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 import aurafarmer.task.Task;
@@ -107,6 +108,14 @@ public class TaskList {
      */
     public ArrayList<Task> getTasks() {
         return tasks;
+    }
+
+    /**
+     * Sorts tasks chronologically by date.
+     * Todos without dates are placed at the end.
+     */
+    public void sortTasks() {
+        tasks.sort(Comparator.comparing(Task::getDate));
     }
 
     /**

@@ -131,6 +131,16 @@ public class Ui {
         }
     }
 
+    /**
+     * Displays the task list after sorting.
+     */
+    public void showSorted(TaskList tasks) {
+        print("    aura: tasks sorted by date:");
+        for (int i = 0; i < tasks.size(); i++) {
+            print("    aura: " + (i + 1) + "." + tasks.getTask(i));
+        }
+    }
+
     public void close() {
         scanner.close();
     }

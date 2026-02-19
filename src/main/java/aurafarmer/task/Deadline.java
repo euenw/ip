@@ -59,6 +59,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public LocalDate getDate() {
+        return by != null ? by : LocalDate.MAX;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + getByForDisplay() + ")";
     }
