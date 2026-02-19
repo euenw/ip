@@ -24,6 +24,7 @@ public class Parser {
      * @throws AuraFarmerException If the input is invalid or unrecognized.
      */
     public static Command parse(String fullCommand) throws AuraFarmerException {
+        assert fullCommand != null : "Command string should not be null";
         String[] parts = fullCommand.split(" ", 2);
         String commandWord = parts[0];
 
