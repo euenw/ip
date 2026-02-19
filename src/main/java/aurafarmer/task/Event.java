@@ -92,6 +92,11 @@ public class Event extends Task {
     }
 
     @Override
+    public LocalDate getDate() {
+        return fromDate != null ? fromDate : LocalDate.MAX;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + getFromForDisplay() + " to: " + getToForDisplay() + ")";
     }

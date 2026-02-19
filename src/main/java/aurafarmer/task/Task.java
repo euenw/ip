@@ -1,5 +1,7 @@
 package aurafarmer.task;
 
+import java.time.LocalDate;
+
 /**
  * Represents a task with a description and completion status.
  */
@@ -56,6 +58,14 @@ public class Task {
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Returns the date associated with this task for sorting.
+     * Tasks without dates return LocalDate.MAX so they sort last.
+     */
+    public LocalDate getDate() {
+        return LocalDate.MAX;
     }
 
     @Override

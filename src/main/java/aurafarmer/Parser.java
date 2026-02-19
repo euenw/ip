@@ -8,6 +8,7 @@ import aurafarmer.command.EventCommand;
 import aurafarmer.command.FindCommand;
 import aurafarmer.command.ListCommand;
 import aurafarmer.command.MarkCommand;
+import aurafarmer.command.SortCommand;
 import aurafarmer.command.TodoCommand;
 import aurafarmer.command.UnmarkCommand;
 
@@ -48,6 +49,8 @@ public class Parser {
             return parseEventCommand(arguments);
         case "find":
             return parseFindCommand(arguments);
+        case "sort":
+            return new SortCommand();
         default:
             throw new AuraFarmerException("i don't know what that means, you're losing aura");
         }
