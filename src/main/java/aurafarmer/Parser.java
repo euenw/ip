@@ -26,6 +26,7 @@ public class Parser {
     public static Command parse(String fullCommand) throws AuraFarmerException {
         String[] parts = fullCommand.split(" ", 2);
         String commandWord = parts[0];
+        String arguments = parts.length > 1 ? parts[1] : "";
 
         switch (commandWord) {
         case "bye":
@@ -33,109 +34,80 @@ public class Parser {
         case "list":
             return new ListCommand();
         case "mark":
-            return parseMarkCommand(fullCommand);
+            return new MarkCommand(parseTaskIndex(arguments, "mark"));
         case "unmark":
-            return parseUnmarkCommand(fullCommand);
-        case "todo":
-            return parseTodoCommand(fullCommand);
-        case "deadline":
-            return parseDeadlineCommand(fullCommand);
-        case "event":
-            return parseEventCommand(fullCommand);
+            return new UnmarkCommand(parseTaskIndex(arguments, "unmark"));
         case "delete":
-            return parseDeleteCommand(fullCommand);
+            return new DeleteCommand(parseTaskIndex(arguments, "delete"));
+        case "todo":
+            return parseTodoCommand(arguments);
+        case "deadline":
+            return parseDeadlineCommand(arguments);
+        case "event":
+            return parseEventCommand(arguments);
         case "find":
-            return parseFindCommand(fullCommand);
+            return parseFindCommand(arguments);
         default:
             throw new AuraFarmerException("i don't know what that means, you're losing aura");
         }
     }
 
-    private static Command parseMarkCommand(String input) throws AuraFarmerException {
-        if (input.length() <= 5) {
-            throw new AuraFarmerException("mark what? give me a task number");
+    private static int parseTaskIndex(String arguments, String commandName) throws AuraFarmerException {
+        if (arguments.trim().isEmpty()) {
+            throw new AuraFarmerException(commandName + " what? give me a task number");
         }
         try {
-            int taskIndex = Integer.parseInt(input.substring(5).trim()) - 1;
-            return new MarkCommand(taskIndex);
+            return Integer.parseInt(arguments.trim()) - 1;
         } catch (NumberFormatException e) {
             throw new AuraFarmerException("that's not a valid number, no aura for you");
         }
     }
 
-    private static Command parseUnmarkCommand(String input) throws AuraFarmerException {
-        if (input.length() <= 7) {
-            throw new AuraFarmerException("unmark what? give me a task number");
-        }
-        try {
-            int taskIndex = Integer.parseInt(input.substring(7).trim()) - 1;
-            return new UnmarkCommand(taskIndex);
-        } catch (NumberFormatException e) {
-            throw new AuraFarmerException("that's not a valid number, no aura for you");
-        }
-    }
-
-    private static Command parseTodoCommand(String input) throws AuraFarmerException {
-        if (input.length() <= 5 || input.substring(5).trim().isEmpty()) {
+    private static Command parseTodoCommand(String arguments) throws AuraFarmerException {
+        if (arguments.trim().isEmpty()) {
             throw new AuraFarmerException("the description of a todo cannot be empty, that's negative aura");
         }
-        String description = input.substring(5);
-        return new TodoCommand(description);
+        return new TodoCommand(arguments);
     }
 
-    private static Command parseDeadlineCommand(String input) throws AuraFarmerException {
-        if (input.length() <= 9 || !input.contains(" /by ")) {
+    private static Command parseDeadlineCommand(String arguments) throws AuraFarmerException {
+        if (arguments.trim().isEmpty() || !arguments.contains(" /by ")) {
             throw new AuraFarmerException("deadline needs a description and /by time, that's how you farm aura");
         }
-        String rest = input.substring(9);
-        int byIndex = rest.indexOf(" /by ");
+        int byIndex = arguments.indexOf(" /by ");
         if (byIndex <= 0) {
             throw new AuraFarmerException("deadline needs a description before /by");
         }
-        String description = rest.substring(0, byIndex);
-        String by = rest.substring(byIndex + 5);
+        String description = arguments.substring(0, byIndex);
+        String by = arguments.substring(byIndex + " /by ".length());
         if (by.trim().isEmpty()) {
             throw new AuraFarmerException("when is the deadline? give me the /by time");
         }
         return new DeadlineCommand(description, by);
     }
 
-    private static Command parseEventCommand(String input) throws AuraFarmerException {
-        if (input.length() <= 6 || !input.contains(" /from ") || !input.contains(" /to ")) {
+    private static Command parseEventCommand(String arguments) throws AuraFarmerException {
+        if (arguments.trim().isEmpty() || !arguments.contains(" /from ") || !arguments.contains(" /to ")) {
             throw new AuraFarmerException("event needs a description, /from and /to times");
         }
-        String rest = input.substring(6);
-        int fromIndex = rest.indexOf(" /from ");
-        int toIndex = rest.indexOf(" /to ");
+        int fromIndex = arguments.indexOf(" /from ");
+        int toIndex = arguments.indexOf(" /to ");
         if (fromIndex <= 0) {
             throw new AuraFarmerException("event needs a description before /from");
         }
-        String description = rest.substring(0, fromIndex);
-        String from = rest.substring(fromIndex + 7, toIndex);
-        String to = rest.substring(toIndex + 5);
+        String description = arguments.substring(0, fromIndex);
+        String from = arguments.substring(fromIndex + " /from ".length(), toIndex);
+        String to = arguments.substring(toIndex + " /to ".length());
         if (from.trim().isEmpty() || to.trim().isEmpty()) {
             throw new AuraFarmerException("event needs both /from and /to times filled in");
         }
         return new EventCommand(description, from, to);
     }
 
-    private static Command parseFindCommand(String input) throws AuraFarmerException {
-        if (input.length() <= 5 || input.substring(5).trim().isEmpty()) {
+    private static Command parseFindCommand(String arguments) throws AuraFarmerException {
+        if (arguments.trim().isEmpty()) {
             throw new AuraFarmerException("find what? give me a keyword");
         }
-        String keyword = input.substring(5).trim();
-        return new FindCommand(keyword);
-    }
-
-    private static Command parseDeleteCommand(String input) throws AuraFarmerException {
-        if (input.length() <= 7) {
-            throw new AuraFarmerException("delete what? give me a task number");
-        }
-        try {
-            int taskIndex = Integer.parseInt(input.substring(7).trim()) - 1;
-            return new DeleteCommand(taskIndex);
-        } catch (NumberFormatException e) {
-            throw new AuraFarmerException("that's not a valid number, no aura for you");
-        }
+        return new FindCommand(arguments.trim());
     }
 }
