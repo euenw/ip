@@ -23,6 +23,8 @@ public class Storage {
      * @param filePath Path to the file used for storing tasks.
      */
     public Storage(String filePath) {
+        assert filePath != null : "File path should not be null";
+        assert !filePath.isEmpty() : "File path should not be empty";
         this.filePath = filePath;
     }
 
@@ -82,6 +84,7 @@ public class Storage {
                 throw new AuraFarmerException("corrupted data: unknown task type");
             }
 
+            assert task != null : "Parsed task should not be null";
             if (isDone) {
                 task.markAsDone();
             }
