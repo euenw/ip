@@ -19,6 +19,7 @@ public class AuraFarmer {
      * @param filePath Path to the data file for storing tasks.
      */
     public AuraFarmer(String filePath) {
+        assert filePath != null : "Data file path should not be null";
         ui = new Ui();
         storage = new Storage(filePath);
         try {
