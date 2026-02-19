@@ -51,6 +51,22 @@ public class AuraFarmer {
         ui.close();
     }
 
+    /**
+     * Generates a response for the given user input.
+     */
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            command.execute(tasks, ui, storage);
+            if (command.isExit()) {
+                return "aura: next time you return, return with more aura";
+            }
+        } catch (AuraFarmerException e) {
+            return "aura: oops! " + e.getMessage();
+        }
+        return ui.getLastResponse();
+    }
+
     public static void main(String[] args) {
         new AuraFarmer(DATA_FILE_PATH).run();
     }

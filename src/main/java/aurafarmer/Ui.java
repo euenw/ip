@@ -11,9 +11,28 @@ import aurafarmer.task.Task;
 public class Ui {
     private static final String LINE = "    ____________________________________________________________";
     private Scanner scanner;
+    private StringBuilder responseBuffer;
 
+    /**
+     * Constructs a new Ui instance.
+     */
     public Ui() {
         this.scanner = new Scanner(System.in);
+        this.responseBuffer = new StringBuilder();
+    }
+
+    private void print(String message) {
+        System.out.println(message);
+        responseBuffer.append(message).append("\n");
+    }
+
+    /**
+     * Returns the last captured response and clears the buffer.
+     */
+    public String getLastResponse() {
+        String response = responseBuffer.toString().trim();
+        responseBuffer.setLength(0);
+        return response;
     }
 
     public void showLine() {
@@ -31,11 +50,11 @@ public class Ui {
     }
 
     public void showGoodbye() {
-        System.out.println("    aura: next time you return, return with more aura");
+        print("    aura: next time you return, return with more aura");
     }
 
     public void showError(String message) {
-        System.out.println("    aura: oops! " + message);
+        print("    aura: oops! " + message);
     }
 
     public void showLoadingError() {
@@ -52,9 +71,9 @@ public class Ui {
      * @param tasks TaskList to display.
      */
     public void showTaskList(TaskList tasks) {
-        System.out.println("    aura: here are the tasks in your list:");
+        print("    aura: here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("    aura: " + (i + 1) + "." + tasks.getTask(i));
+            print("    aura: " + (i + 1) + "." + tasks.getTask(i));
         }
     }
 
@@ -65,9 +84,9 @@ public class Ui {
      * @param size Current number of tasks in the list.
      */
     public void showTaskAdded(Task task, int size) {
-        System.out.println("    aura: got it. i've added this task:");
-        System.out.println("    aura:   " + task);
-        System.out.println("    aura: now you have " + size + " tasks in the list.");
+        print("    aura: got it. i've added this task:");
+        print("    aura:   " + task);
+        print("    aura: now you have " + size + " tasks in the list.");
     }
 
     /**
@@ -77,9 +96,9 @@ public class Ui {
      * @param size Current number of tasks in the list.
      */
     public void showTaskDeleted(Task task, int size) {
-        System.out.println("    aura: noted. i've removed this task:");
-        System.out.println("    aura:   " + task);
-        System.out.println("    aura: now you have " + size + " tasks in the list.");
+        print("    aura: noted. i've removed this task:");
+        print("    aura:   " + task);
+        print("    aura: now you have " + size + " tasks in the list.");
     }
 
     /**
@@ -88,8 +107,8 @@ public class Ui {
      * @param task Task that was marked.
      */
     public void showTaskMarked(Task task) {
-        System.out.println("    aura: nice! i've marked this task as done:");
-        System.out.println("    aura:   " + task);
+        print("    aura: nice! i've marked this task as done:");
+        print("    aura:   " + task);
     }
 
     /**
@@ -98,17 +117,17 @@ public class Ui {
      * @param task Task that was unmarked.
      */
     public void showTaskUnmarked(Task task) {
-        System.out.println("    aura: ok, i've marked this task as not done yet:");
-        System.out.println("    aura:   " + task);
+        print("    aura: ok, i've marked this task as not done yet:");
+        print("    aura:   " + task);
     }
 
     /**
      * Displays the list of tasks matching a search keyword.
      */
     public void showFoundTasks(ArrayList<Task> tasks) {
-        System.out.println("    aura: here are the matching tasks in your list:");
+        print("    aura: here are the matching tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("    " + (i + 1) + "." + tasks.get(i));
+            print("    " + (i + 1) + "." + tasks.get(i));
         }
     }
 
