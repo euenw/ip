@@ -6,6 +6,9 @@ import aurafarmer.TaskList;
 import aurafarmer.Ui;
 import aurafarmer.task.Task;
 
+/**
+ * Represents a command to mark a task as done.
+ */
 public class MarkCommand extends Command {
     private int taskIndex;
 

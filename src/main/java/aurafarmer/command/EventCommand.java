@@ -7,11 +7,17 @@ import aurafarmer.Ui;
 import aurafarmer.task.Event;
 import aurafarmer.task.Task;
 
+/**
+ * Represents a command to add an event task.
+ */
 public class EventCommand extends Command {
     private String description;
     private String from;
     private String to;
 
+    /**
+     * Creates a new EventCommand with the given description, start and end times.
+     */
     public EventCommand(String description, String from, String to) {
         this.description = description;
         this.from = from;

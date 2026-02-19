@@ -6,6 +6,9 @@ import aurafarmer.TaskList;
 import aurafarmer.Ui;
 import aurafarmer.task.Task;
 
+/**
+ * Represents a command to unmark a task as not done.
+ */
 public class UnmarkCommand extends Command {
     private int taskIndex;
 

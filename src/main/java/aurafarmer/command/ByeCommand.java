@@ -4,6 +4,9 @@ import aurafarmer.Storage;
 import aurafarmer.TaskList;
 import aurafarmer.Ui;
 
+/**
+ * Represents a command to exit the application.
+ */
 public class ByeCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

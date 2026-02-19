@@ -7,6 +7,9 @@ import aurafarmer.Ui;
 import aurafarmer.task.Task;
 import aurafarmer.task.Todo;
 
+/**
+ * Represents a command to add a todo task.
+ */
 public class TodoCommand extends Command {
     private String description;
 

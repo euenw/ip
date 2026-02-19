@@ -8,6 +8,9 @@ import aurafarmer.TaskList;
 import aurafarmer.Ui;
 import aurafarmer.task.Task;
 
+/**
+ * Represents a command to find tasks by keyword.
+ */
 public class FindCommand extends Command {
     private String keyword;
 

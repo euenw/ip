@@ -124,7 +124,8 @@ public class Storage {
             return "D | " + (task.isDone() ? "1" : "0") + " | " + task.getDescription() + " | " + d.getBy();
         } else if (task instanceof Event) {
             Event e = (Event) task;
-            return "E | " + (task.isDone() ? "1" : "0") + " | " + task.getDescription() + " | " + e.getFrom() + " | " + e.getTo();
+            return "E | " + (task.isDone() ? "1" : "0") + " | " + task.getDescription()
+                    + " | " + e.getFrom() + " | " + e.getTo();
         }
         return "";
     }

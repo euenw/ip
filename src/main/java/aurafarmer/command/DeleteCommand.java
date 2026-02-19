@@ -6,6 +6,9 @@ import aurafarmer.TaskList;
 import aurafarmer.Ui;
 import aurafarmer.task.Task;
 
+/**
+ * Represents a command to delete a task.
+ */
 public class DeleteCommand extends Command {
     private int taskIndex;
 

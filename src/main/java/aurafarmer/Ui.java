@@ -20,6 +20,9 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+     * Displays the welcome message.
+     */
     public void showWelcome() {
         showLine();
         System.out.println("    aura: hello! i'm aurafarmer");
@@ -99,6 +102,9 @@ public class Ui {
         System.out.println("    aura:   " + task);
     }
 
+    /**
+     * Displays the list of tasks matching a search keyword.
+     */
     public void showFoundTasks(ArrayList<Task> tasks) {
         System.out.println("    aura: here are the matching tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {

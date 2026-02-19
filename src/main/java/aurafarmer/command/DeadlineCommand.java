@@ -7,10 +7,16 @@ import aurafarmer.Ui;
 import aurafarmer.task.Deadline;
 import aurafarmer.task.Task;
 
+/**
+ * Represents a command to add a deadline task.
+ */
 public class DeadlineCommand extends Command {
     private String description;
     private String by;
 
+    /**
+     * Creates a new DeadlineCommand with the given description and deadline.
+     */
     public DeadlineCommand(String description, String by) {
         this.description = description;
         this.by = by;
